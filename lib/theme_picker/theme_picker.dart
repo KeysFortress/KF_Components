@@ -1,6 +1,6 @@
+import 'package:components/theme_picker/theme_picker_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/components/theme_picker/theme_picker_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 class ThemePicker extends StatelessWidget {

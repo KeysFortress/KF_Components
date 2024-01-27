@@ -1,6 +1,6 @@
+import 'package:components/password_strenght/password_strenght_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/components/password_strenght/password_strenght_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 class PasswordStrenght extends StatelessWidget {

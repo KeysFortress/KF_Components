@@ -1,8 +1,8 @@
+import 'package:components/qr_scanner/qr_scanner_viewmodel.dart';
 import 'package:domain/styles.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:presentation/components/qr_scanner/qr_scanner_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 class QrScannerView extends StatelessWidget {

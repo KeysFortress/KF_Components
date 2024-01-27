@@ -1,6 +1,6 @@
+import 'package:components/seconds_counter/seconds_counter_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/components/seconds_counter/seconds_counter_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 class SecoondsCounter extends StatelessWidget {

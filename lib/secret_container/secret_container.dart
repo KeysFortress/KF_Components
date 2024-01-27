@@ -1,7 +1,7 @@
+import 'package:components/custom_button/custom_button.dart';
+import 'package:components/secret_container/secret_container_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/components/custom_button/custom_button.dart';
-import 'package:presentation/components/secret_container/secret_container_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 class SecretContainer extends StatelessWidget {

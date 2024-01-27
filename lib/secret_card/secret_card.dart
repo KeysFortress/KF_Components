@@ -1,10 +1,10 @@
+import 'package:components/custom_button/custom_button.dart';
+import 'package:components/password_strenght/password_strenght.dart';
+import 'package:components/secret_card/secret_card.viewmodel.dart';
 import 'package:domain/models/stored_secret.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:presentation/components/custom_button/custom_button.dart';
-import 'package:presentation/components/password_strenght/password_strenght.dart';
-import 'package:presentation/components/secret_card/secret_card.viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 class SecretCard extends StatelessWidget {

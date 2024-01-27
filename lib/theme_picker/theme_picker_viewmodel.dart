@@ -6,7 +6,7 @@ import 'package:domain/styles.dart';
 import 'package:domain/white_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:infrastructure/interfaces/ilocal_storage.dart';
-import 'package:presentation/page_view_model.dart';
+import 'package:shared/page_view_model.dart';
 
 class ThemePickerViewModel extends PageViewModel {
   late IlocalStorage _storage;

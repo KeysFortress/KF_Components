@@ -1,7 +1,7 @@
+import 'package:components/custom_button/custom_button.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:presentation/components/custom_button/custom_button.dart';
 
 class NavMenuInner extends StatelessWidget {
   final Widget? icon;
