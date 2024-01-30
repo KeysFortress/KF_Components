@@ -27,6 +27,10 @@ class DashboardHeaderViewModel extends PageViewModel {
       // TODO: Handle this case.
       case ActiveNavigationPage.identities:
         loadIdentities();
+      case ActiveNavigationPage.totp:
+      // TODO: Handle this case.
+      case ActiveNavigationPage.secrets:
+      // TODO: Handle this case.
     }
   }
 

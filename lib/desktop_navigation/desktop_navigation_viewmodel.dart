@@ -2,16 +2,28 @@ import 'package:domain/models/enums.dart';
 import 'package:shared/page_view_model.dart';
 
 class DesktopNavigationViewModel extends PageViewModel {
-  DesktopNavigationViewModel(super.context);
+  Function pageChanged;
+
+  DesktopNavigationViewModel(super.context, this.pageChanged);
 
   ActiveNavigationPage _selected = ActiveNavigationPage.passwords;
   ActiveNavigationPage get selected => _selected;
 
   onCloudSync() {}
 
-  onPasswordsPressed() {}
+  onPasswordsPressed() {
+    pageChanged.call(ActiveNavigationPage.passwords);
+  }
 
-  onTotpPressed() {}
+  onTotpPressed() {
+    pageChanged.call(ActiveNavigationPage.totp);
+  }
 
-  onCertificatesPressed() {}
+  onSecretsPressed() {
+    pageChanged.call(ActiveNavigationPage.secrets);
+  }
+
+  onFidoPressed() {
+    pageChanged.call(ActiveNavigationPage.identities);
+  }
 }
