@@ -19,6 +19,8 @@ class DashboardToggle extends StatelessWidget {
       builder: (context, viewModel, child) => CustomButton(
         callback: viewModel.onPresssed,
         widget: Container(
+          width: 200,
+          height: 200,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: viewModel.isActive

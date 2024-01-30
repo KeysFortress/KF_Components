@@ -64,7 +64,7 @@ class CustomIconButton extends StatelessWidget {
                   ),
                   if (icon != null && label.isNotEmpty)
                     const SizedBox(
-                      width: 6,
+                      width: 16,
                     ),
                   if (label.isNotEmpty)
                     Text(
