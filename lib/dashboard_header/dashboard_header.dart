@@ -9,12 +9,18 @@ import 'dashboard_header.viewmodel.dart';
 
 class DashboardHeader extends StatelessWidget {
   final Function onNewPassword;
+  final String name;
+  final String icon;
   final ActiveNavigationPage type;
+  final bool btnVisible;
 
   const DashboardHeader({
     super.key,
     required this.onNewPassword,
     required this.type,
+    required this.name,
+    required this.icon,
+    this.btnVisible = true,
   });
 
   @override
@@ -35,9 +41,7 @@ class DashboardHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SvgPicture.asset(
-                  type == ActiveNavigationPage.passwords
-                      ? "assets/images/shield.svg"
-                      : "assets/images/certificate.svg",
+                  "assets/images/$icon",
                   package: 'domain',
                   width: 80,
                   colorFilter: ColorFilter.mode(
@@ -50,7 +54,7 @@ class DashboardHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${viewModel.saved} ${type == ActiveNavigationPage.passwords ? "Passwords" : "Certificates"}",
+                      name,
                       style: ThemeStyles.regularParagraphOv(
                         size: 23,
                         color: ThemeStyles.theme.accent100,
@@ -67,27 +71,32 @@ class DashboardHeader extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            Container(
-              margin: const EdgeInsets.all(8),
-              child: CustomIconButton(
-                expand: false,
-                icon: SvgPicture.asset(
-                  'assets/images/engine.svg',
-                  package: 'domain',
-                  width: 20,
-                  height: 20,
-                  colorFilter: ColorFilter.mode(
-                    ThemeStyles.theme.primary300,
-                    BlendMode.srcIn,
+            if (btnVisible)
+              Column(
+                children: [
+                  const SizedBox(height: 16),
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    child: CustomIconButton(
+                      expand: false,
+                      icon: SvgPicture.asset(
+                        'assets/images/engine.svg',
+                        package: 'domain',
+                        width: 20,
+                        height: 20,
+                        colorFilter: ColorFilter.mode(
+                          ThemeStyles.theme.primary300,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      label: "Generate new",
+                      callback: () {
+                        onNewPassword.call();
+                      },
+                    ),
                   ),
-                ),
-                label: "Generate new",
-                callback: () {
-                  onNewPassword.call();
-                },
+                ],
               ),
-            ),
             const SizedBox(height: 8),
           ],
         ),

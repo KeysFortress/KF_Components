@@ -7,15 +7,15 @@ import 'package:stacked/stacked.dart';
 import 'package:shared/base_component_toggle.dart';
 
 class DesktopNavigation extends StatelessWidget {
-  final Function onPageChanged;
-  const DesktopNavigation({super.key, required this.onPageChanged});
+  final BuildContext context;
+  const DesktopNavigation({super.key, required this.context});
 
   @override
-  Widget build(BuildContext context) {
+  // ignore: avoid_renaming_method_parameters
+  Widget build(BuildContext componentContext) {
     return Material(
       child: ViewModelBuilder.reactive(
-        viewModelBuilder: () =>
-            DesktopNavigationViewModel(context, onPageChanged),
+        viewModelBuilder: () => DesktopNavigationViewModel(context),
         builder: (context, viewModel, child) => Stack(
           children: [
             Container(

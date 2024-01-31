@@ -1,15 +1,18 @@
 import 'package:domain/models/enums.dart';
 import 'package:infrastructure/interfaces/iidentity_manager.dart';
+import 'package:infrastructure/interfaces/iotp_service.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
 import 'package:shared/page_view_model.dart';
 
 class DashboardHeaderViewModel extends PageViewModel {
   late ISecretManager _secretManager;
   late IIdentityManager _identityManager;
+  late IOtpService _otpService;
   DashboardHeaderViewModel(super.context, ActiveNavigationPage type) {
     observer.subscribe("active_page_changed", pageChanged);
     _secretManager = getIt.get<ISecretManager>();
     _identityManager = getIt.get<IIdentityManager>();
+    _otpService = getIt.get<IOtpService>();
     pageChanged(type);
   }
 
@@ -28,7 +31,7 @@ class DashboardHeaderViewModel extends PageViewModel {
       case ActiveNavigationPage.identities:
         loadIdentities();
       case ActiveNavigationPage.totp:
-      // TODO: Handle this case.
+        loadTotp();
       case ActiveNavigationPage.secrets:
       // TODO: Handle this case.
     }
@@ -48,6 +51,14 @@ class DashboardHeaderViewModel extends PageViewModel {
     _totalSaved = secrets.length;
     secrets.sort((a, b) => a.lastUsed.isAfter(b.lastUsed) == true ? 1 : 0);
     var lastDate = secrets.first.lastUsed;
+    _lastUsed = "${lastDate.day}/${lastDate.month}/${lastDate.year}";
+    notifyListeners();
+  }
+
+  void loadTotp() async {
+    var otp = await _otpService.get();
+    _totalSaved = otp.length;
+    var lastDate = DateTime.now();
     _lastUsed = "${lastDate.day}/${lastDate.month}/${lastDate.year}";
     notifyListeners();
   }
