@@ -23,8 +23,8 @@ class DashboardHeader extends StatelessWidget {
       viewModelBuilder: () => DashboardHeaderViewModel(context, type),
       builder: (context, viewModel, child) => Container(
         width: double.infinity,
-        padding: EdgeInsets.all(5),
-        margin: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(5),
+        margin: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: ThemeStyles.theme.primary300,
           borderRadius: BorderRadius.circular(12),
@@ -69,7 +69,7 @@ class DashboardHeader extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Container(
-              margin: EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
               child: CustomIconButton(
                 expand: false,
                 icon: SvgPicture.asset(
