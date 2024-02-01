@@ -54,8 +54,8 @@ class NavMenuInner extends StatelessWidget {
                   child: CustomButton(
                     callback: () => callback.call(),
                     widget: Container(
-                      padding: EdgeInsets.fromLTRB(35, 20, 35, 20),
-                      child: Text(""),
+                      padding: const EdgeInsets.fromLTRB(35, 20, 35, 20),
+                      child: const Text(""),
                     ),
                   ),
                 ),

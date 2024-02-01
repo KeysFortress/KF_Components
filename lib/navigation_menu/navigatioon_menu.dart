@@ -17,7 +17,7 @@ class NavigationMenu extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => NavigationMenuViewModel(context),
       builder: (context, viewModel, child) => Container(
-        margin: EdgeInsets.all(16),
+        margin: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -41,10 +41,7 @@ class NavigationMenu extends StatelessWidget {
                 ),
               ),
               label: "",
-              callback: () {
-                onPageChanged.call(ActiveNavigationPage.passwords);
-                viewModel.onPasswordsPressed();
-              },
+              callback: viewModel.onPasswordsPressed,
             ),
             CustomIconButton(
               buttonColor: ThemeStyles.theme.primary300,
@@ -80,10 +77,7 @@ class NavigationMenu extends StatelessWidget {
                 width: 50,
               ),
               label: "",
-              callback: () {
-                onPageChanged.call(ActiveNavigationPage.identities);
-                viewModel.onCertificatesPressed();
-              },
+              callback: viewModel.onCertificatesPressed,
             )
           ],
         ),

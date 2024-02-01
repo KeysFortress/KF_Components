@@ -10,19 +10,35 @@ class NavigationMenuViewModel extends PageViewModel {
 
   onPasswordsPressed() {
     _selected = ActiveNavigationPage.passwords;
-    notifyListeners();
+
+    router.changePage(
+      "/passwords",
+      pageContext,
+      TransitionData(
+        next: PageTransition.slideBack,
+      ),
+    );
   }
 
   onCertificatesPressed() {
     _selected = ActiveNavigationPage.identities;
     notifyListeners();
+
+    router.changePage(
+      "/identities",
+      pageContext,
+      TransitionData(
+        next: PageTransition.slideForward,
+      ),
+    );
   }
 
   onTotpPressed() {
+    observer.getObserver("on_menu_state_changed", false);
     router.changePage(
       "/totp",
       pageContext,
-      TransitionData(next: PageTransition.slideForward),
+      TransitionData(next: PageTransition.easeInAndOut),
     );
   }
 }
