@@ -34,8 +34,6 @@ class NavigationMenuViewModel extends PageViewModel {
   }
 
   onTotpPressed() {
-    router.isBottomNavigationVisible = false;
-    router.isMainMenuVisible = false;
     observer.getObserver("on_menu_state_changed", false);
     router.changePage(
       "/totp",
