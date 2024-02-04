@@ -78,7 +78,7 @@ class IdentityCard extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     color: ThemeStyles.theme.primary300,
                     borderRadius: BorderRadius.circular(4),
