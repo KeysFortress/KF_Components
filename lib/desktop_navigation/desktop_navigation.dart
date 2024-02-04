@@ -2,7 +2,6 @@ import 'package:components/dashboard_toggle/dasboard_toggle.dart';
 import 'package:components/desktop_navigation/desktop_navigation_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared/base_component_toggle.dart';
 
@@ -33,11 +32,31 @@ class DesktopNavigation extends StatelessWidget {
                             DashboardToggle(
                               viewModel: BaseComponentToggle(
                                   context,
+                                  "assets/images/settings.svg",
+                                  "Settings",
+                                  viewModel.onPasswordsPressed),
+                            ),
+                            const SizedBox(width: 16),
+                            DashboardToggle(
+                              viewModel: BaseComponentToggle(
+                                  context,
+                                  "assets/images/sync.svg",
+                                  "Connect",
+                                  viewModel.onSecretsPressed),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            DashboardToggle(
+                              viewModel: BaseComponentToggle(
+                                  context,
                                   "assets/images/website-password.svg",
                                   "Passwords",
                                   viewModel.onPasswordsPressed),
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 16),
                             DashboardToggle(
                               viewModel: BaseComponentToggle(
                                   context,
@@ -57,7 +76,7 @@ class DesktopNavigation extends StatelessWidget {
                                   "TOTP",
                                   viewModel.onTotpPressed),
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 16),
                             DashboardToggle(
                               viewModel: BaseComponentToggle(
                                   context,
@@ -69,20 +88,6 @@ class DesktopNavigation extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              left: 10,
-              top: 10,
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    "assets/images/settings.svg",
-                    package: "domain",
-                    width: 30,
-                    height: 30,
                   )
                 ],
               ),
