@@ -8,7 +8,14 @@ import 'package:domain/models/component_action.dart';
 
 class DashboardToggle extends StatelessWidget {
   final ComponentActionViewModel viewModel;
-  const DashboardToggle({super.key, required this.viewModel});
+  final double width;
+  final double height;
+  const DashboardToggle({
+    super.key,
+    required this.viewModel,
+    this.width = 200,
+    this.height = 200,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +26,8 @@ class DashboardToggle extends StatelessWidget {
       builder: (context, viewModel, child) => CustomButton(
         callback: viewModel.onPresssed,
         widget: Container(
-          width: 200,
-          height: 200,
+          width: width,
+          height: height,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: viewModel.isActive
