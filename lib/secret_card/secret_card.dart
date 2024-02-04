@@ -16,8 +16,8 @@ class SecretCard extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => SecretCardViewModel(context, secret),
       builder: (context, viewModel, child) => Container(
-        padding: EdgeInsets.all(15),
-        margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
+        padding: const EdgeInsets.all(15),
+        margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
         decoration: BoxDecoration(
           color: ThemeStyles.theme.background200,
           borderRadius: BorderRadius.circular(4),
