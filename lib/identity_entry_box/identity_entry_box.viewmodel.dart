@@ -17,7 +17,7 @@ class IdentityEntryBoxViewModel extends PageViewModel {
     _name = name;
   }
 
-  void onSave() async {
+  Future onSave() async {
     var result = await _identityManager.setSecret(
       StoredIdentity(
         _name,

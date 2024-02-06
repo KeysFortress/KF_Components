@@ -21,7 +21,7 @@ class PasswordEntryBoxViewModel extends PageViewModel {
     _email = email;
   }
 
-  void onSave() async {
+  Future onSave() async {
     var result = await _secretManager.setSecret(
       StoredSecret(
         name: _name,

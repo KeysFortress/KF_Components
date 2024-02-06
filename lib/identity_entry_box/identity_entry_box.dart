@@ -23,11 +23,11 @@ class IdentityEntryBox extends StatelessWidget {
       builder: (context, viewModel, child) => Container(
         color: ThemeStyles.theme.background200,
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(40, 0, 40, 20),
+                margin: const EdgeInsets.fromLTRB(40, 0, 40, 20),
                 width: double.infinity,
                 height: 5,
                 decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class IdentityEntryBox extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Container(
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   color: ThemeStyles.theme.primary300,
                   borderRadius: BorderRadius.circular(4),
@@ -98,7 +98,7 @@ class IdentityEntryBox extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Container(
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   color: ThemeStyles.theme.primary300,
                   borderRadius: BorderRadius.circular(4),
@@ -139,8 +139,8 @@ class IdentityEntryBox extends StatelessWidget {
               const SizedBox(height: 8),
               CustomIconButton(
                 label: "Save",
-                callback: () {
-                  viewModel.onSave();
+                callback: () async {
+                  await viewModel.onSave();
                   onSave.call();
                 },
               ),

@@ -56,8 +56,8 @@ class PasswordEntryBox extends StatelessWidget {
               const SizedBox(height: 8),
               CustomIconButton(
                 label: "Save",
-                callback: () {
-                  viewModel.onSave();
+                callback: () async {
+                  await viewModel.onSave();
                   onSave.call();
                 },
               ),
