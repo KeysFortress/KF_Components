@@ -80,26 +80,13 @@ class CustomTextField extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        if (!enabled)
-          Center(
-            child: Text(
-              controller?.text ?? "",
-              style: TextStyle(
-                color: textColor,
-                fontFamily: textFontFamily,
-                fontSize: fontSize,
-                fontWeight: FontWeight.w400,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ),
         TextField(
           onSubmitted: (str) {
             submitted?.call(str);
           },
           focusNode: textFocusNode,
           keyboardType: restricted,
-          controller: !enabled ? TextEditingController(text: " ") : controller,
+          controller: controller,
           onChanged: (value) => onChange.call(value),
           textAlign: TextAlign.center,
           cursorColor: cursorColor,
@@ -118,13 +105,12 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             isDense: true,
             floatingLabelAlignment: FloatingLabelAlignment.center,
-            disabledBorder: OutlineInputBorder(
+            disabledBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
               borderSide: BorderSide(
-                color: isClickable
-                    ? ThemeStyles.theme.accent100
-                    : ThemeStyles.theme.text200.withAlpha(60),
+                color: borderFocusedColor,
+                width: 1,
               ),
-              borderRadius: BorderRadius.circular(borderRadius),
             ),
             hintText: hint,
             prefixIcon: prefixIcon != null && textAlign != TextAlign.center
