@@ -20,6 +20,7 @@ dependencies:
     path: "../KF_Infrastructure"
   flutter_svg: ^2.0.4
   qr_code_scanner: ^1.0.1
+  pattern_lock: ^2.0.0
 
 
 dev_dependencies:
