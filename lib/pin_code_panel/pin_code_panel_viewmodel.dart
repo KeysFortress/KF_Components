@@ -12,14 +12,18 @@ class PinCodePanelViewModel extends PageViewModel {
   PinCodePanelViewModel(super.context);
 
   buttonPressed(int number) {
+    if (_password.length == 6) return;
+
+    _password += number.toString();
     if (_password.length == 6) {
       _password = "";
       router.changePage(
-        "/password",
+        "/passwords",
         pageContext,
         TransitionData(next: PageTransition.easeInAndOut),
       );
     }
+    notifyListeners();
   }
 
   onRemovePressed() {
