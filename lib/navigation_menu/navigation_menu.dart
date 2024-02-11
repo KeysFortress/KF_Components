@@ -14,7 +14,7 @@ class NavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => NavigationMenuViewModel(context),
+      viewModelBuilder: () => NavigationMenuViewModel(context, currentPage),
       builder: (context, viewModel, child) => Container(
         margin: const EdgeInsets.all(16),
         decoration: BoxDecoration(
