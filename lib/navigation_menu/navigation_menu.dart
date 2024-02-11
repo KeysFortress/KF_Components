@@ -8,9 +8,8 @@ import '../custom_icon_button/custom_icon_button.dart';
 import 'navigation_menu.viewmodel.dart';
 
 class NavigationMenu extends StatelessWidget {
-  final Function onPageChanged;
-
-  const NavigationMenu({super.key, required this.onPageChanged});
+  final ActiveNavigationPage currentPage;
+  const NavigationMenu({super.key, required this.currentPage});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class NavigationMenu extends StatelessWidget {
                 "assets/images/timer.svg",
                 package: 'domain',
                 colorFilter: ColorFilter.mode(
-                  viewModel.selected == ActiveNavigationPage.syncMode
+                  viewModel.selected == ActiveNavigationPage.totp
                       ? ThemeStyles.theme.accent100
                       : ThemeStyles.theme.accent200,
                   BlendMode.srcIn,

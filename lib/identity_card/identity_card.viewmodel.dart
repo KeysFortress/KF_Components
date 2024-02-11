@@ -20,7 +20,7 @@ class IdentityCardViewModel extends ComponentBaseModel {
   }
 
   onSave() {
-    router.dismissBar();
+    router.dismissBar(pageContext);
   }
 
   onManualSignPressed() {
