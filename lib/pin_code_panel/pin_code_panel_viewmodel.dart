@@ -1,22 +1,31 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
+import 'package:infrastructure/interfaces/iauthorization_service.dart';
 import 'package:shared/component_base_model.dart';
 
 class PinCodePanelViewModel extends ComponentBaseModel {
+  late IAuthorizationService _authorizationService;
   bool _isPasswordHidden = true;
   bool get isPasswordHidden => _isPasswordHidden;
 
   String _password = "";
   get password => _password;
 
-  PinCodePanelViewModel(super.context);
+  PinCodePanelViewModel(super.context) {
+    _authorizationService = getIt.get<IAuthorizationService>();
+  }
 
-  buttonPressed(int number) {
+  buttonPressed(int number) async {
     if (_password.length == 6) return;
 
     _password += number.toString();
     if (_password.length == 6) {
+      var isValid = await _authorizationService.unlockPin(_password);
+      if (!isValid) return;
+
       _password = "";
+
+      // ignore: use_build_context_synchronously
       router.changePage(
         "/passwords",
         pageContext,
