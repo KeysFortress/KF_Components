@@ -1,16 +1,15 @@
 import 'package:domain/models/stored_secret.dart';
-import 'package:flutter/services.dart';
+import 'package:infrastructure/interfaces/isecret_manager.dart';
 import 'package:shared/component_base_model.dart';
 
 class SecretCardViewModel extends ComponentBaseModel {
   StoredSecret storedSecret;
-  SecretCardViewModel(super.context, this.storedSecret);
+  late ISecretManager _secretManager;
+  SecretCardViewModel(super.context, this.storedSecret) {
+    _secretManager = getIt.get<ISecretManager>();
+  }
 
   onCopyPressed() {
-    Clipboard.setData(
-      ClipboardData(
-        text: storedSecret.content,
-      ),
-    );
+    _secretManager.copySensitiveData(storedSecret.content);
   }
 }

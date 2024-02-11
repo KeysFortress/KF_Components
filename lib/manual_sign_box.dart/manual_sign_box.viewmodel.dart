@@ -4,8 +4,8 @@ import 'package:domain/converters/binary_converter.dart';
 import 'package:domain/models/http_request.dart';
 import 'package:domain/models/signature_event.dart';
 import 'package:domain/models/stored_identity.dart';
-import 'package:flutter/services.dart';
 import 'package:infrastructure/interfaces/ihttp_provider_service.dart';
+import 'package:infrastructure/interfaces/isecret_manager.dart';
 import 'package:infrastructure/interfaces/isignature_service.dart';
 import 'package:infrastructure/interfaces/isignature_store.dart';
 import 'package:cryptography/src/cryptography/signature.dart';
@@ -15,7 +15,7 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
   late ISignatureService _signatureService;
   late IHttpProviderService _providerService;
   late ISignatureStore _store;
-
+  late ISecretManager _secretManager;
   Function onSaveCallback;
   StoredIdentity identity;
   String _message = "";
@@ -32,6 +32,7 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
   ManualSignBoxViewModel(super.context, this.identity, this.onSaveCallback) {
     _signatureService = getIt.get<ISignatureService>();
     _store = getIt.get<ISignatureStore>();
+    _secretManager = getIt.get<ISecretManager>();
   }
 
   bool _advanced = false;
@@ -53,9 +54,6 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
 
     _signature = await _signatureService.signMessage(getKeyData, _message);
 
-    print(_signature!.publicKey);
-    print(_signature!.bytes);
-
     _event = SignatureEvent(
       identity.publicKey,
       BianaryConverter.toHex(_signature!.bytes),
@@ -72,19 +70,12 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
   }
 
   onCopySignature() {
-    Clipboard.setData(
-      ClipboardData(
-        text: BianaryConverter.toHex(_signature!.bytes),
-      ),
-    );
+    var data = BianaryConverter.toHex(_signature!.bytes);
+    _secretManager.copySensitiveData(data);
   }
 
   onCopyPublic() {
-    Clipboard.setData(
-      ClipboardData(
-        text: identity.publicKey,
-      ),
-    );
+    _secretManager.copySensitiveData(identity.publicKey);
   }
 
   onUrlChanged(String url) {
