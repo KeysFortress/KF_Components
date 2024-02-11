@@ -1,9 +1,9 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
 import 'package:infrastructure/interfaces/iauthorization_service.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class PatternPanelViewModel extends PageViewModel {
+class PatternPanelViewModel extends ComponentBaseModel {
   late IAuthorizationService _authorizationService;
   PatternPanelViewModel(super.context) {
     _authorizationService = getIt.get<IAuthorizationService>();

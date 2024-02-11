@@ -1,6 +1,6 @@
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class PasswordStrenghtViewModel extends PageViewModel {
+class PasswordStrenghtViewModel extends ComponentBaseModel {
   int _strenght = 1;
   int get strenght => _strenght;
 

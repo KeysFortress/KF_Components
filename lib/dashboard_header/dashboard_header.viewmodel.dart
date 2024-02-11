@@ -2,9 +2,9 @@ import 'package:domain/models/enums.dart';
 import 'package:infrastructure/interfaces/iidentity_manager.dart';
 import 'package:infrastructure/interfaces/iotp_service.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class DashboardHeaderViewModel extends PageViewModel {
+class DashboardHeaderViewModel extends ComponentBaseModel {
   late ISecretManager _secretManager;
   late IIdentityManager _identityManager;
   late IOtpService _otpService;

@@ -9,9 +9,9 @@ import 'package:infrastructure/interfaces/ihttp_provider_service.dart';
 import 'package:infrastructure/interfaces/isignature_service.dart';
 import 'package:infrastructure/interfaces/isignature_store.dart';
 import 'package:cryptography/src/cryptography/signature.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class ManualSignBoxViewModel extends PageViewModel {
+class ManualSignBoxViewModel extends ComponentBaseModel {
   late ISignatureService _signatureService;
   late IHttpProviderService _providerService;
   late ISignatureStore _store;

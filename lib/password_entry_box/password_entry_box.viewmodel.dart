@@ -1,9 +1,9 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_secret.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class PasswordEntryBoxViewModel extends PageViewModel {
+class PasswordEntryBoxViewModel extends ComponentBaseModel {
   late ISecretManager _secretManager;
   final String password;
   late String _name;

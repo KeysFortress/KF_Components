@@ -1,11 +1,11 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_identity.dart';
 import 'package:domain/models/transition_data.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
 import '../manual_sign_box.dart/manual_sign_box.dart';
 
-class IdentityCardViewModel extends PageViewModel {
+class IdentityCardViewModel extends ComponentBaseModel {
   StoredIdentity identity;
 
   IdentityCardViewModel(super.context, this.identity);

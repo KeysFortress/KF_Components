@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class SecondsCounterViewModel extends PageViewModel {
+class SecondsCounterViewModel extends ComponentBaseModel {
   int _seconds = 60;
   int get seconds => _seconds;
 

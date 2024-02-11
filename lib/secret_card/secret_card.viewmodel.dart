@@ -1,8 +1,8 @@
 import 'package:domain/models/stored_secret.dart';
 import 'package:flutter/services.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class SecretCardViewModel extends PageViewModel {
+class SecretCardViewModel extends ComponentBaseModel {
   StoredSecret storedSecret;
   SecretCardViewModel(super.context, this.storedSecret);
 

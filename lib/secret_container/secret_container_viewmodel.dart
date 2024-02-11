@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class SecretContainerViewModel extends PageViewModel {
+class SecretContainerViewModel extends ComponentBaseModel {
   SecretContainerViewModel(super.context);
 
   onCopyValue(String value) {

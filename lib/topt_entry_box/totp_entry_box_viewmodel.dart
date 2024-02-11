@@ -1,8 +1,8 @@
 import 'package:domain/models/otp_code.dart';
 import 'package:infrastructure/interfaces/iotp_service.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class TotpEntryBoxViewModel extends PageViewModel {
+class TotpEntryBoxViewModel extends ComponentBaseModel {
   late IOtpService _otpService;
   OtpCode? _code;
   OtpCode? get code => _code;
@@ -15,7 +15,6 @@ class TotpEntryBoxViewModel extends PageViewModel {
     try {
       _code = OtpCode.fromQrCodeLink(link);
     } catch (ex) {
-      print(ex);
       _code = null;
     }
     notifyListeners();

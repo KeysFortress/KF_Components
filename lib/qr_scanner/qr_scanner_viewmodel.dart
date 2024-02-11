@@ -4,9 +4,9 @@ import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:domain/exceptions/no_camera_permission.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class QrScannerViewmodel extends PageViewModel {
+class QrScannerViewmodel extends ComponentBaseModel {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');

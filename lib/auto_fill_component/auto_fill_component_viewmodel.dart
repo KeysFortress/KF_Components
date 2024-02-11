@@ -1,6 +1,6 @@
-import 'package:shared/page_view_model.dart';
+import 'package:shared/component_base_model.dart';
 
-class AutoFillComponentViewModel extends PageViewModel {
+class AutoFillComponentViewModel extends ComponentBaseModel {
   AutoFillComponentViewModel(super.context);
 
   get usernameController => null;
