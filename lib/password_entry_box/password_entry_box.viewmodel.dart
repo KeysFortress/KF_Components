@@ -5,12 +5,36 @@ import 'package:shared/component_base_model.dart';
 
 class PasswordEntryBoxViewModel extends ComponentBaseModel {
   late ISecretManager _secretManager;
-  final String password;
+  String _password = "";
+  String get password => _password;
   late String _name;
   late String _email;
 
-  PasswordEntryBoxViewModel(super.context, this.password) {
+  bool _isAdvanced = false;
+  bool get isAdvanced => _isAdvanced;
+  double _passwordSize = 8;
+  double get passwordSize => _passwordSize;
+
+  bool _isSpecialAllowed = true;
+  bool get isSpecialAllowed => _isSpecialAllowed;
+
+  bool _isDigit = true;
+  bool get isDigit => _isDigit;
+  bool _isLower = true;
+  bool get isLower => _isLower;
+  bool _isUpper = true;
+  bool get isUpper => _isUpper;
+  bool _isUnique = true;
+  bool get isUnique => _isUnique;
+
+  PasswordEntryBoxViewModel(super.context) {
     _secretManager = getIt.get<ISecretManager>();
+  }
+
+  ready(String current) {
+    _password = current;
+    _passwordSize = password.length.toDouble();
+    notifyListeners();
   }
 
   onNameChanged(String name) {
@@ -37,5 +61,65 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
         null,
       );
     }
+  }
+
+  onAdvancedPressed() {
+    _isAdvanced = !_isAdvanced;
+    notifyListeners();
+  }
+
+  void onSizeChanged(double value) {
+    _passwordSize = value;
+
+    generatePassword();
+    notifyListeners();
+  }
+
+  void onAllowSpecialChaged(bool value) {
+    _isSpecialAllowed = !_isSpecialAllowed;
+    generatePassword();
+    notifyListeners();
+  }
+
+  void onIsUniqueChanged(bool value) {
+    _isUnique = !_isUnique;
+    generatePassword();
+    notifyListeners();
+  }
+
+  void onAllowLowerChanged(bool value) {
+    _isLower = !_isLower;
+    generatePassword();
+    notifyListeners();
+  }
+
+  void onIsDigitChanged(bool value) {
+    _isDigit = !_isDigit;
+    generatePassword();
+    notifyListeners();
+  }
+
+  void onIsUpperChanged(bool value) {
+    _isUpper = !_isUpper;
+    generatePassword();
+    notifyListeners();
+  }
+
+  void generatePassword() {
+    _password = _secretManager.generateSecret(
+      length: _passwordSize.toInt(),
+      isDigit: _isDigit,
+      isLower: _isLower,
+      isUpper: _isUpper,
+      isUnique: _isUnique,
+      isSecial: _isSpecialAllowed,
+    );
+    print(_password);
+  }
+
+  applyLenght(double value) {
+    _passwordSize = value;
+    generatePassword();
+    notifyListeners();
   }
 }
