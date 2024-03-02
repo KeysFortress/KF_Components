@@ -6,6 +6,7 @@ import 'package:stacked/stacked.dart';
 class CustomSlider extends StatelessWidget {
   final double initialValue;
   final double maxValue;
+  final double minValue;
   final int divisios;
   final Function slidingStopped;
 
@@ -13,6 +14,7 @@ class CustomSlider extends StatelessWidget {
     super.key,
     required this.initialValue,
     required this.maxValue,
+    this.minValue = 0,
     required this.divisios,
     required this.slidingStopped,
   });
@@ -25,6 +27,7 @@ class CustomSlider extends StatelessWidget {
       builder: (context, viewModel, child) => Slider(
         value: viewModel.value,
         max: maxValue,
+        min: minValue,
         label: viewModel.value.toInt().toString(),
         divisions: divisios,
         activeColor: ThemeStyles.theme.primary300,

@@ -76,6 +76,7 @@ class PasswordEntryBox extends StatelessWidget {
                     ),
                     CustomSlider(
                       initialValue: viewModel.passwordSize,
+                      minValue: 12,
                       maxValue: 512,
                       divisios: 512,
                       slidingStopped: (value) => viewModel.applyLenght(value),
