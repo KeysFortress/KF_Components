@@ -5,6 +5,7 @@ import 'package:shared/component_base_model.dart';
 
 class PasswordEntryBoxViewModel extends ComponentBaseModel {
   late ISecretManager _secretManager;
+
   String _password = "";
   String get password => _password;
   late String _name;
@@ -26,6 +27,8 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
   bool get isUpper => _isUpper;
   bool _isUnique = true;
   bool get isUnique => _isUnique;
+  bool _isCopyActionPresent = false;
+  bool get isCopyActionPresent => _isCopyActionPresent;
 
   PasswordEntryBoxViewModel(super.context) {
     _secretManager = getIt.get<ISecretManager>();
@@ -55,11 +58,10 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
         secretType: SecretType.password,
       ),
     );
+
     if (result) {
-      observer.getObserver(
-        "reload_passwords",
-        null,
-      );
+      _isCopyActionPresent = true;
+      notifyListeners();
     }
   }
 
@@ -114,12 +116,19 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
       isUnique: _isUnique,
       isSecial: _isSpecialAllowed,
     );
-    print(_password);
   }
 
   applyLenght(double value) {
     _passwordSize = value;
     generatePassword();
     notifyListeners();
+  }
+
+  onConfirmCopy(String password) async {
+    await _secretManager.copySensitiveData(password);
+    observer.getObserver(
+      "reload_passwords",
+      null,
+    );
   }
 }
