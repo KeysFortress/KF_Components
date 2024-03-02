@@ -1,11 +1,12 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_secret.dart';
+import 'package:infrastructure/interfaces/ilocal_storage.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
 import 'package:shared/component_base_model.dart';
 
 class PasswordEntryBoxViewModel extends ComponentBaseModel {
   late ISecretManager _secretManager;
-
+  late IlocalStorage _storage;
   String _password = "";
   String get password => _password;
   late String _name;
@@ -32,6 +33,7 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
 
   PasswordEntryBoxViewModel(super.context) {
     _secretManager = getIt.get<ISecretManager>();
+    _storage = getIt.get<IlocalStorage>();
   }
 
   ready(String current) {
@@ -49,8 +51,10 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
   }
 
   Future onSave() async {
+    var id = await _storage.generateId();
     var result = await _secretManager.setSecret(
       StoredSecret(
+        id: id,
         name: _name,
         username: _email,
         content: password,
