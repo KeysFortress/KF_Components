@@ -45,6 +45,11 @@ class CopyPasswordWarningBox extends StatelessWidget {
                     "Be cautious, as other apps may have access to your clipboard. Ensure a secure environment before copying sensitive information.",
                     style: ThemeStyles.regularParagraph,
                   ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Password will be held in the device clipboard for 30 seconds after confirming this action!",
+                    style: ThemeStyles.regularParagraph,
+                  )
                 ],
               )),
           Expanded(
