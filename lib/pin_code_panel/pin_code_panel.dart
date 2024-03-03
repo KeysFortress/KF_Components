@@ -14,6 +14,7 @@ class PinCodePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => PinCodePanelViewModel(context),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
