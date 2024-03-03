@@ -29,6 +29,7 @@ class CustomButton extends StatelessWidget {
         onTap: () {
           if (disableEffect) {
             callback.call();
+            return;
           }
           if (enabled) {
             viewModel.onButtonPressed(callback);

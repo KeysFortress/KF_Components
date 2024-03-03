@@ -27,7 +27,7 @@ class CustomIconButton extends StatelessWidget {
     this.buttonColor = const Color(0xFF288ba3),
     this.fontColor = const Color.fromRGBO(255, 255, 255, 0.9),
     this.enabled = true,
-    this.playAnim = false,
+    this.playAnim = true,
     this.btnRadius,
     this.border,
     this.expand = false,
@@ -41,6 +41,7 @@ class CustomIconButton extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.ready(playAnim),
       builder: (context, viewModel, child) {
         var button = CustomButton(
+          disableEffect: viewModel.disableAnimation,
           enabled: enabled,
           callback: () => enabled ? callback.call() : {},
           widget: Opacity(
