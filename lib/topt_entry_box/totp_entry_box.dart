@@ -1,4 +1,3 @@
-import 'package:components/custom_button/custom_button.dart';
 import 'package:components/custom_icon_button/custom_icon_button.dart';
 import 'package:components/custom_text_field/custom_text_field.dart';
 import 'package:components/horizontal_divider/horizontal_divider.dart';
@@ -6,7 +5,6 @@ import 'package:components/seconds_counter/seconds_counter.dart';
 import 'package:components/topt_entry_box/totp_entry_box_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 
 class TotpEntryBox extends StatelessWidget {
