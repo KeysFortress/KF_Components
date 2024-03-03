@@ -6,7 +6,7 @@ class TotpEntryBoxViewModel extends ComponentBaseModel {
   late IOtpService _otpService;
   OtpCode? _code;
   OtpCode? get code => _code;
-  Function onSaveCallback;
+  Function? onSaveCallback;
   TotpEntryBoxViewModel(super.context, this.onSaveCallback) {
     _otpService = getIt.get<IOtpService>();
   }
@@ -30,6 +30,9 @@ class TotpEntryBoxViewModel extends ComponentBaseModel {
     if (_code == null) return;
 
     await _otpService.add(_code!);
-    onSaveCallback.call();
+
+    // ignore: use_build_context_synchronously
+    if (onSaveCallback == null) router.backToPrevious(pageContext);
+    onSaveCallback?.call();
   }
 }
