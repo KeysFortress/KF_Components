@@ -28,6 +28,9 @@ class NavigationMenu extends StatelessWidget {
               buttonColor: ThemeStyles.theme.primary300,
               btnRadius: 0,
               expand: true,
+              playAnim: viewModel.selected == ActiveNavigationPage.passwords
+                  ? false
+                  : true,
               icon: SvgPicture.asset(
                 "assets/images/website-password.svg",
                 package: 'domain',
@@ -40,12 +43,17 @@ class NavigationMenu extends StatelessWidget {
                 ),
               ),
               label: "",
-              callback: viewModel.onPasswordsPressed,
+              callback: viewModel.selected == ActiveNavigationPage.passwords
+                  ? () {}
+                  : viewModel.onPasswordsPressed,
             ),
             CustomIconButton(
               buttonColor: ThemeStyles.theme.primary300,
               btnRadius: 0,
               expand: true,
+              playAnim: viewModel.selected == ActiveNavigationPage.totp
+                  ? false
+                  : true,
               icon: SvgPicture.asset(
                 "assets/images/timer.svg",
                 package: 'domain',
@@ -58,9 +66,14 @@ class NavigationMenu extends StatelessWidget {
                 width: 50,
               ),
               label: "",
-              callback: viewModel.onTotpPressed,
+              callback: viewModel.selected == ActiveNavigationPage.totp
+                  ? () {}
+                  : viewModel.onTotpPressed,
             ),
             CustomIconButton(
+              playAnim: viewModel.selected == ActiveNavigationPage.identities
+                  ? false
+                  : true,
               buttonColor: ThemeStyles.theme.primary300,
               btnRadius: 0,
               expand: true,
@@ -76,7 +89,9 @@ class NavigationMenu extends StatelessWidget {
                 width: 50,
               ),
               label: "",
-              callback: viewModel.onCertificatesPressed,
+              callback: viewModel.selected == ActiveNavigationPage.identities
+                  ? () {}
+                  : viewModel.onCertificatesPressed,
             )
           ],
         ),
