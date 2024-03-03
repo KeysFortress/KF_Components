@@ -11,33 +11,36 @@ class PatternPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => PatternPanelViewModel(context),
-      builder: (context, viewModel, child) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(15),
-            margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-            decoration: BoxDecoration(
-              color: ThemeStyles.theme.background200,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: SizedBox(
-              height: ThemeStyles.height! / 2,
-              child: PatternLock(
-                selectedColor: ThemeStyles.theme.primary300,
-                pointRadius: 8,
-                showInput: true,
-                dimension: 3,
-                relativePadding: 0.7,
-                selectThreshold: 25,
-                fillPoints: true,
-                onInputComplete: (List<int> input) =>
-                    viewModel.onPatternFilled(input),
-              ),
-            ),
-          ),
-        ],
-      ),
+      onViewModelReady: (viewModel) => viewModel.ready(),
+      builder: (context, viewModel, child) => viewModel.isLocked
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(15),
+                  margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                  decoration: BoxDecoration(
+                    color: ThemeStyles.theme.background200,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: SizedBox(
+                    height: ThemeStyles.height! / 2,
+                    child: PatternLock(
+                      selectedColor: ThemeStyles.theme.primary300,
+                      pointRadius: 8,
+                      showInput: true,
+                      dimension: 3,
+                      relativePadding: 0.7,
+                      selectThreshold: 25,
+                      fillPoints: true,
+                      onInputComplete: (List<int> input) =>
+                          viewModel.onPatternFilled(input),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : const Column(),
     );
   }
 }

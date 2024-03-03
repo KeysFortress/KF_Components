@@ -4,6 +4,9 @@ import 'package:infrastructure/interfaces/iauthorization_service.dart';
 import 'package:shared/component_base_model.dart';
 
 class PinCodePanelViewModel extends ComponentBaseModel {
+  bool _isLocked = true;
+  bool get isLocked => _isLocked;
+
   late IAuthorizationService _authorizationService;
   bool _isPasswordHidden = true;
   bool get isPasswordHidden => _isPasswordHidden;
@@ -15,6 +18,12 @@ class PinCodePanelViewModel extends ComponentBaseModel {
     _authorizationService = getIt.get<IAuthorizationService>();
   }
 
+  ready() {
+    _password = "";
+    _isLocked = true;
+    notifyListeners();
+  }
+
   buttonPressed(int number) async {
     if (_password.length == 6) return;
 
@@ -24,7 +33,8 @@ class PinCodePanelViewModel extends ComponentBaseModel {
       if (!isValid) return;
 
       _password = "";
-
+      _isLocked = false;
+      notifyListeners();
       // ignore: use_build_context_synchronously
       router.changePage(
         "/passwords",
