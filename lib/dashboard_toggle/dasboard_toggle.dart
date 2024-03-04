@@ -8,12 +8,12 @@ import 'package:domain/models/component_action.dart';
 
 class DashboardToggle extends StatelessWidget {
   final ComponentActionViewModel viewModel;
-  final double width;
+  final double? width;
   final double height;
   const DashboardToggle({
     super.key,
     required this.viewModel,
-    this.width = 200,
+    this.width,
     this.height = 200,
   });
 
