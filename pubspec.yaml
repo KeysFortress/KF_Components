@@ -21,6 +21,7 @@ dependencies:
   flutter_svg: ^2.0.4
   qr_code_scanner: ^1.0.1
   pattern_lock: ^2.0.0
+  local_auth: ^2.1.8
 
 
 dev_dependencies:
