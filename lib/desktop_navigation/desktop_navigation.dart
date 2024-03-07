@@ -30,19 +30,23 @@ class DesktopNavigation extends StatelessWidget {
                         Row(
                           children: [
                             DashboardToggle(
+                              width: 180,
                               viewModel: BaseComponentToggle(
-                                  context,
-                                  "assets/images/settings.svg",
-                                  "Settings",
-                                  viewModel.onPasswordsPressed),
+                                context,
+                                "assets/images/settings.svg",
+                                "Settings",
+                                viewModel.onPasswordsPressed,
+                              ),
                             ),
                             const SizedBox(width: 16),
                             DashboardToggle(
+                              width: 180,
                               viewModel: BaseComponentToggle(
-                                  context,
-                                  "assets/images/sync.svg",
-                                  "Connect",
-                                  viewModel.onSecretsPressed),
+                                context,
+                                "assets/images/sync.svg",
+                                "Connect",
+                                viewModel.onSecretsPressed,
+                              ),
                             ),
                           ],
                         ),
@@ -50,19 +54,23 @@ class DesktopNavigation extends StatelessWidget {
                         Row(
                           children: [
                             DashboardToggle(
+                              width: 180,
                               viewModel: BaseComponentToggle(
-                                  context,
-                                  "assets/images/website-password.svg",
-                                  "Passwords",
-                                  viewModel.onPasswordsPressed),
+                                context,
+                                "assets/images/website-password.svg",
+                                "Passwords",
+                                viewModel.onPasswordsPressed,
+                              ),
                             ),
                             const SizedBox(width: 16),
                             DashboardToggle(
+                              width: 180,
                               viewModel: BaseComponentToggle(
-                                  context,
-                                  "assets/images/secrets.svg",
-                                  "Secrets",
-                                  viewModel.onSecretsPressed),
+                                context,
+                                "assets/images/secrets.svg",
+                                "Secrets",
+                                viewModel.onSecretsPressed,
+                              ),
                             ),
                           ],
                         ),
@@ -70,19 +78,23 @@ class DesktopNavigation extends StatelessWidget {
                         Row(
                           children: [
                             DashboardToggle(
+                              width: 180,
                               viewModel: BaseComponentToggle(
-                                  context,
-                                  "assets/images/timer.svg",
-                                  "TOTP",
-                                  viewModel.onTotpPressed),
+                                context,
+                                "assets/images/timer.svg",
+                                "TOTP",
+                                viewModel.onTotpPressed,
+                              ),
                             ),
                             const SizedBox(width: 16),
                             DashboardToggle(
+                              width: 180,
                               viewModel: BaseComponentToggle(
-                                  context,
-                                  "assets/images/certificate.svg",
-                                  "FIDO2",
-                                  viewModel.onFidoPressed),
+                                context,
+                                "assets/images/certificate.svg",
+                                "FIDO2",
+                                viewModel.onFidoPressed,
+                              ),
                             ),
                           ],
                         ),
