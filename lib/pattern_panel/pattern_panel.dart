@@ -1,3 +1,4 @@
+import 'package:components/authentication_failed/authentication_failed.dart';
 import 'package:components/pattern_panel/pattern_panel_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,19 @@ class PatternPanel extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => PatternPanelViewModel(context),
       onViewModelReady: (viewModel) => viewModel.ready(),
-      builder: (context, viewModel, child) => viewModel.isLocked
+      builder: (context, viewModel, child) => viewModel.patternFailed
           ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: ThemeStyles.height! / 3,
+                  child: AuthenticationFailed(
+                    onTryAgain: viewModel.onTryAgain,
+                  ),
+                ),
+              ],
+            )
+          : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -39,8 +51,7 @@ class PatternPanel extends StatelessWidget {
                   ),
                 ),
               ],
-            )
-          : const Column(),
+            ),
     );
   }
 }

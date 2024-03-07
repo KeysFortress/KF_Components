@@ -1,3 +1,4 @@
+import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
 import 'package:flutter/services.dart';
@@ -11,13 +12,20 @@ class BiometricPanelViewModel extends ComponentBaseModel {
   bool get failedToAuthenticate => _failedToAuthenticate;
   BiometricPanelViewModel(super.context);
 
+  ready() async {
+    await requestBiometric();
+  }
+
   Future requestBiometric() async {
     try {
       await auth.stopAuthentication();
 
       var result = await auth.authenticate(
         localizedReason: 'Please authenticate to unlock the application',
-        options: const AuthenticationOptions(useErrorDialogs: false),
+        options: const AuthenticationOptions(
+          useErrorDialogs: false,
+          biometricOnly: true,
+        ),
       );
 
       if (result) {
@@ -32,18 +40,34 @@ class BiometricPanelViewModel extends ComponentBaseModel {
     } on PlatformException catch (e) {
       if (e.code == auth_error.notEnrolled) {
         _failedToAuthenticate = true;
+        throw BaseException(
+          // ignore: use_build_context_synchronously
+          context: pageContext,
+          message: e.message,
+        );
       } else if (e.code == auth_error.lockedOut ||
           e.code == auth_error.permanentlyLockedOut) {
         _failedToAuthenticate = true;
+        throw BaseException(
+          // ignore: use_build_context_synchronously
+          context: pageContext,
+          message: e.message,
+        );
       } else {
         _failedToAuthenticate = true;
+        throw BaseException(
+          // ignore: use_build_context_synchronously
+          context: pageContext,
+          message: e.message,
+        );
       }
     }
     notifyListeners();
   }
 
-  onTryAgain() {
+  onTryAgain() async {
     _failedToAuthenticate = false;
     notifyListeners();
+    await requestBiometric();
   }
 }

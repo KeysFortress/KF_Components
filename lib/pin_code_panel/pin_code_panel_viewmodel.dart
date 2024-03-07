@@ -1,3 +1,4 @@
+import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
 import 'package:infrastructure/interfaces/iauthorization_service.dart';
@@ -17,6 +18,9 @@ class PinCodePanelViewModel extends ComponentBaseModel {
   String _password = "";
   get password => _password;
 
+  bool _isWrongPassword = false;
+  bool get isWrongPassword => _isWrongPassword;
+
   PinCodePanelViewModel(super.context) {
     _authorizationService = getIt.get<IAuthorizationService>();
     _routerService = getIt.get<IPageRouterService>();
@@ -34,7 +38,13 @@ class PinCodePanelViewModel extends ComponentBaseModel {
     _password += number.toString();
     if (_password.length == 6) {
       var isValid = await _authorizationService.unlockPin(_password);
-      if (!isValid) return;
+
+      if (!isValid) {
+        _isWrongPassword = true;
+        notifyListeners();
+        return;
+      }
+
       _routerService.isLocked = false;
       _password = "";
       _isLocked = false;
@@ -58,5 +68,17 @@ class PinCodePanelViewModel extends ComponentBaseModel {
   onChangeVisability() {
     _isPasswordHidden = !_isPasswordHidden;
     notifyListeners();
+  }
+
+  onTryAgain() {
+    _isWrongPassword = false;
+    _password = "";
+
+    notifyListeners();
+    throw BaseException(
+      context: pageContext,
+      message: "wadawdk awkd wad wald kwalkd kwakd klwa dlkaw dlkaw dkaw",
+      title: "Wrong password",
+    );
   }
 }
