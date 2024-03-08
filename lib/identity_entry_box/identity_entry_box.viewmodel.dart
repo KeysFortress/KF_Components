@@ -9,7 +9,7 @@ class IdentityEntryBoxViewModel extends ComponentBaseModel {
   late IlocalStorage _storage;
   final KeyDto keyData;
   late String _name;
-  late String _email;
+  bool _isSaving = false;
 
   IdentityEntryBoxViewModel(super.context, this.keyData) {
     _identityManager = getIt.get<IIdentityManager>();
@@ -21,8 +21,11 @@ class IdentityEntryBoxViewModel extends ComponentBaseModel {
   }
 
   Future onSave() async {
-    var id = await _storage.generateId();
+    if (_isSaving) return;
 
+    _isSaving = true;
+
+    var id = await _storage.generateId();
     var result = await _identityManager.setSecret(
       StoredIdentity(
         id,
