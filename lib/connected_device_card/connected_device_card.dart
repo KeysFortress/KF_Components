@@ -107,7 +107,7 @@ class ConnectedDeviceCard extends StatelessWidget {
                     color: ThemeStyles.theme.text300,
                   ),
                   Text(
-                    "${viewModel.device.syncType.name.characters.first.toUpperCase()} Sync",
+                    "${viewModel.activeType.name.characters.first.toUpperCase()} Sync",
                     style: ThemeStyles.regularParagraphOv(
                       color: ThemeStyles.theme.text300,
                     ),

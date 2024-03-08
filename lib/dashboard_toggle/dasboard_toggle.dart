@@ -65,11 +65,10 @@ class DashboardToggle extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 2, 0, 0),
                   child: Text(
-                    viewModel.statusMessage ?? "active".i18n(),
+                    "active".i18n(),
                     style: ThemeStyles.regularParagraphOv(
                       size: 12,
-                      color: viewModel.defaultMessageColor ??
-                          ThemeStyles.theme.text300,
+                      color: ThemeStyles.theme.text300,
                     ),
                     softWrap: false,
                     overflow: TextOverflow.ellipsis,
