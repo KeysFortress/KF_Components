@@ -30,6 +30,7 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
   bool get isUnique => _isUnique;
   bool _isCopyActionPresent = false;
   bool get isCopyActionPresent => _isCopyActionPresent;
+  bool _isSaving = false;
 
   PasswordEntryBoxViewModel(super.context) {
     _secretManager = getIt.get<ISecretManager>();
@@ -51,6 +52,9 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
   }
 
   Future onSave() async {
+    if (_isSaving) return;
+
+    _isSaving = true;
     var id = await _storage.generateId();
     var result = await _secretManager.setSecret(
       StoredSecret(
