@@ -79,6 +79,7 @@ class DashboardHeader extends StatelessWidget {
                     margin: const EdgeInsets.all(8),
                     child: CustomIconButton(
                       expand: false,
+                      height: 40,
                       icon: SvgPicture.asset(
                         'assets/images/engine.svg',
                         package: 'domain',
