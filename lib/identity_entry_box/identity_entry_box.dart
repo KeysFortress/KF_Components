@@ -104,6 +104,7 @@ class IdentityEntryBox extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const SizedBox(width: 8),
                     Icon(
@@ -112,8 +113,9 @@ class IdentityEntryBox extends StatelessWidget {
                       size: 35,
                     ),
                     const SizedBox(width: 8),
-                    Flexible(
+                    Expanded(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "*********************************",
@@ -138,6 +140,7 @@ class IdentityEntryBox extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               CustomIconButton(
+                height: 50,
                 label: "Save",
                 callback: () async {
                   await viewModel.onSave();

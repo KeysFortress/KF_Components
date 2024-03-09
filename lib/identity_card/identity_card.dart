@@ -17,8 +17,8 @@ class IdentityCard extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => IdentityCardViewModel(context, identity),
       builder: (context, viewModel, child) => Container(
-        padding: EdgeInsets.all(15),
-        margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
         decoration: BoxDecoration(
           color: ThemeStyles.theme.background200,
           borderRadius: BorderRadius.circular(4),
@@ -118,7 +118,7 @@ class IdentityCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Container(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     color: ThemeStyles.theme.primary300,
                     borderRadius: BorderRadius.circular(4),
@@ -132,7 +132,7 @@ class IdentityCard extends StatelessWidget {
                         size: 35,
                       ),
                       const SizedBox(width: 8),
-                      Flexible(
+                      Expanded(
                         child: Column(
                           children: [
                             Text(
@@ -161,7 +161,7 @@ class IdentityCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomIconButton(
-                      height: 40,
+                      height: 50,
                       expand: true,
                       label: "Sign",
                       callback: viewModel.onManualSignPressed,
