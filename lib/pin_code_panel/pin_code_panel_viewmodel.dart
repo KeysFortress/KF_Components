@@ -75,10 +75,5 @@ class PinCodePanelViewModel extends ComponentBaseModel {
     _password = "";
 
     notifyListeners();
-    throw BaseException(
-      context: pageContext,
-      message: "wadawdk awkd wad wald kwalkd kwakd klwa dlkaw dlkaw dkaw",
-      title: "Wrong password",
-    );
   }
 }
