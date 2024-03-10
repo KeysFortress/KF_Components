@@ -4,18 +4,23 @@ import 'package:components/sync_data_picker/sync_data_picker_viewmodel.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 
 class SyncDataPicker extends StatelessWidget {
+  final String deviceId;
   final Function onSelected;
-  const SyncDataPicker({super.key, required this.onSelected});
+  const SyncDataPicker({
+    super.key,
+    required this.deviceId,
+    required this.onSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => SyncDataPickerViewModel(context),
+      viewModelBuilder: () =>
+          SyncDataPickerViewModel(context, deviceId, onSelected),
       onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Container(
         color: ThemeStyles.theme.background200,
@@ -32,8 +37,8 @@ class SyncDataPicker extends StatelessWidget {
                 color: ThemeStyles.theme.accent200,
               ),
             ),
-            Container(
-              height: ThemeStyles.height! - 200,
+            SizedBox(
+              height: ThemeStyles.height! - 250,
               child: ListView.builder(
                 itemCount: viewModel.getItemCount(),
                 itemBuilder: (context, index) {
@@ -46,9 +51,10 @@ class SyncDataPicker extends StatelessWidget {
                             Checkbox(
                               activeColor: ThemeStyles.theme.primary300,
                               value: viewModel.exchangeData.secrets.any(
-                                  (element) =>
-                                      element ==
-                                      viewModel.secrets.elementAt(index)),
+                                (element) =>
+                                    element.id ==
+                                    viewModel.secrets.elementAt(index).id,
+                              ),
                               onChanged: (value) => () {},
                             ),
                             Text(
@@ -66,9 +72,10 @@ class SyncDataPicker extends StatelessWidget {
                             Checkbox(
                               activeColor: ThemeStyles.theme.primary300,
                               value: viewModel.exchangeData.otpCodes.any(
-                                  (element) =>
-                                      element ==
-                                      viewModel.codes.elementAt(index)),
+                                (element) =>
+                                    element.id ==
+                                    viewModel.codes.elementAt(index).id,
+                              ),
                               onChanged: (value) => () {},
                             ),
                             Text(
@@ -79,9 +86,8 @@ class SyncDataPicker extends StatelessWidget {
                         ),
                       );
                     case ActiveNavigationPage.secrets:
-                    // TODO: Handle this case.
                     case ActiveNavigationPage.syncMode:
-                    // TODO: Handle this case.
+                      break;
                     case ActiveNavigationPage.identities:
                       return CustomButton(
                         callback: () => viewModel.onIdentitySelected(index),
@@ -90,9 +96,10 @@ class SyncDataPicker extends StatelessWidget {
                             Checkbox(
                               activeColor: ThemeStyles.theme.primary300,
                               value: viewModel.exchangeData.identities.any(
-                                  (element) =>
-                                      element ==
-                                      viewModel.identities.elementAt(index)),
+                                (element) =>
+                                    element.id ==
+                                    viewModel.identities.elementAt(index).id,
+                              ),
                               onChanged: (value) => () {},
                             ),
                             Text(
@@ -180,6 +187,12 @@ class SyncDataPicker extends StatelessWidget {
                           : viewModel.onCertificatesPressed,
                 )
               ],
+            ),
+            CustomIconButton(
+              btnRadius: 0,
+              height: 50,
+              label: "Save",
+              callback: viewModel.onSavePressed,
             )
           ],
         ),
