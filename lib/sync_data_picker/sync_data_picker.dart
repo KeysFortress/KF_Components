@@ -1,6 +1,9 @@
 import 'package:components/custom_button/custom_button.dart';
 import 'package:components/custom_icon_button/custom_icon_button.dart';
+import 'package:components/identity_card/identity_card.dart';
+import 'package:components/secret_card/secret_card.dart';
 import 'package:components/sync_data_picker/sync_data_picker_viewmodel.dart';
+import 'package:components/totp_card/totp_card.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
@@ -46,43 +49,29 @@ class SyncDataPicker extends StatelessWidget {
                     case ActiveNavigationPage.passwords:
                       return CustomButton(
                         callback: () => viewModel.onSecretSelected(index),
-                        widget: Row(
-                          children: [
-                            Checkbox(
-                              activeColor: ThemeStyles.theme.primary300,
-                              value: viewModel.exchangeData.secrets.any(
-                                (element) =>
-                                    element.id ==
-                                    viewModel.secrets.elementAt(index).id,
-                              ),
-                              onChanged: (value) => () {},
-                            ),
-                            Text(
-                              viewModel.secrets.elementAt(index).name,
-                              style: ThemeStyles.regularParagraph,
-                            )
-                          ],
+                        widget: SecretCard(
+                          secret: viewModel.secrets.elementAt(index),
+                          copyEnabled: false,
+                          checkboxEnabled: true,
+                          isChecked: viewModel.exchangeData.secrets.any(
+                            (element) =>
+                                element.id ==
+                                viewModel.secrets.elementAt(index).id,
+                          ),
                         ),
                       );
                     case ActiveNavigationPage.totp:
                       return CustomButton(
                         callback: () => viewModel.onCodeSelected(index),
-                        widget: Row(
-                          children: [
-                            Checkbox(
-                              activeColor: ThemeStyles.theme.primary300,
-                              value: viewModel.exchangeData.otpCodes.any(
-                                (element) =>
-                                    element.id ==
-                                    viewModel.codes.elementAt(index).id,
-                              ),
-                              onChanged: (value) => () {},
-                            ),
-                            Text(
-                              viewModel.secrets.elementAt(index).name,
-                              style: ThemeStyles.regularParagraph,
-                            )
-                          ],
+                        widget: TotpCard(
+                          otpCode: viewModel.codes.elementAt(index),
+                          canDelete: false,
+                          checkboxEnabled: true,
+                          isChecked: viewModel.exchangeData.otpCodes.any(
+                            (element) =>
+                                element.id ==
+                                viewModel.codes.elementAt(index).id,
+                          ),
                         ),
                       );
                     case ActiveNavigationPage.secrets:
@@ -91,22 +80,17 @@ class SyncDataPicker extends StatelessWidget {
                     case ActiveNavigationPage.identities:
                       return CustomButton(
                         callback: () => viewModel.onIdentitySelected(index),
-                        widget: Row(
-                          children: [
-                            Checkbox(
-                              activeColor: ThemeStyles.theme.primary300,
-                              value: viewModel.exchangeData.identities.any(
-                                (element) =>
-                                    element.id ==
-                                    viewModel.identities.elementAt(index).id,
-                              ),
-                              onChanged: (value) => () {},
-                            ),
-                            Text(
-                              viewModel.secrets.elementAt(index).name,
-                              style: ThemeStyles.regularParagraph,
-                            )
-                          ],
+                        widget: IdentityCard(
+                          identity: viewModel.identities.elementAt(index),
+                          isSignatureEnabled: false,
+                          isScanEnabled: false,
+                          isHistoryEnabled: false,
+                          checkboxEnabled: true,
+                          isChecked: viewModel.exchangeData.identities.any(
+                            (element) =>
+                                element.id ==
+                                viewModel.identities.elementAt(index).id,
+                          ),
                         ),
                       );
                   }
