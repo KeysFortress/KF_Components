@@ -10,7 +10,20 @@ import 'identity_card.viewmodel.dart';
 
 class IdentityCard extends StatelessWidget {
   final StoredIdentity identity;
-  const IdentityCard({super.key, required this.identity});
+  final bool isHistoryEnabled;
+  final bool isSignatureEnabled;
+  final bool isScanEnabled;
+  final bool checkboxEnabled;
+  final bool isChecked;
+  const IdentityCard({
+    super.key,
+    required this.identity,
+    this.isHistoryEnabled = true,
+    this.isSignatureEnabled = true,
+    this.isScanEnabled = true,
+    this.checkboxEnabled = false,
+    this.isChecked = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,30 +38,41 @@ class IdentityCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Positioned(
-              left: 0,
-              child: CustomButton(
-                widget: SvgPicture.asset(
-                  "assets/images/history.svg",
-                  package: 'domain',
-                  width: 20,
-                  height: 20,
+            if (isHistoryEnabled)
+              Positioned(
+                left: 0,
+                child: CustomButton(
+                  widget: SvgPicture.asset(
+                    "assets/images/history.svg",
+                    package: 'domain',
+                    width: 20,
+                    height: 20,
+                  ),
+                  callback: viewModel.viewHistory,
                 ),
-                callback: viewModel.viewHistory,
               ),
-            ),
-            Positioned(
-              right: 0,
-              child: CustomButton(
-                widget: SvgPicture.asset(
-                  "assets/images/scan.svg",
-                  package: 'domain',
-                  width: 20,
-                  height: 20,
+            if (isScanEnabled)
+              Positioned(
+                right: 0,
+                child: CustomButton(
+                  widget: SvgPicture.asset(
+                    "assets/images/scan.svg",
+                    package: 'domain',
+                    width: 20,
+                    height: 20,
+                  ),
+                  callback: viewModel.onConnectPressed,
                 ),
-                callback: viewModel.onConnectPressed,
               ),
-            ),
+            if (checkboxEnabled)
+              Positioned(
+                right: 0,
+                child: Checkbox(
+                  activeColor: ThemeStyles.theme.primary300,
+                  value: isChecked,
+                  onChanged: (value) => () {},
+                ),
+              ),
             Column(
               children: [
                 SvgPicture.asset(
@@ -157,17 +181,18 @@ class IdentityCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomIconButton(
-                      height: 50,
-                      expand: true,
-                      label: "Sign",
-                      callback: viewModel.onManualSignPressed,
-                    )
-                  ],
-                )
+                if (isSignatureEnabled)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomIconButton(
+                        height: 50,
+                        expand: true,
+                        label: "Sign",
+                        callback: viewModel.onManualSignPressed,
+                      )
+                    ],
+                  )
               ],
             ),
           ],
