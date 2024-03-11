@@ -28,7 +28,7 @@ class NavMenuInner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(6, 40, 0, 6),
+      padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
       decoration: BoxDecoration(
         color: ThemeStyles.theme.primary300,
         borderRadius: BorderRadius.circular(4),

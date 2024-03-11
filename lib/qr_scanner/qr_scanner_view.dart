@@ -1,6 +1,5 @@
 import 'package:components/qr_scanner/qr_scanner_viewmodel.dart';
 import 'package:domain/styles.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
@@ -14,13 +13,14 @@ class QrScannerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<QrScannerViewmodel>.reactive(
       builder: (context, model, child) => Material(
+        color: ThemeStyles.theme.primary300,
         child: Container(
-          color: Colors.transparent,
+          color: ThemeStyles.theme.primary300,
           child: Stack(
             children: [
               model.buildQrView(context),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, ThemeStyles.height! / 25, 0, 0),
                 color: ThemeStyles.theme.primary300,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
