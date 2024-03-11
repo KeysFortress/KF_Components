@@ -77,13 +77,16 @@ class SecretCard extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text(
-                            secret.name,
-                            style: ThemeStyles.regularParagraphOv(
-                              size: 16,
-                              color: ThemeStyles.theme.primary300,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 8, right: 32),
+                            child: Text(
+                              secret.name,
+                              style: ThemeStyles.regularParagraphOv(
+                                size: 16,
+                                color: ThemeStyles.theme.primary300,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         )
                       ],
@@ -97,11 +100,16 @@ class SecretCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          secret.username,
-                          style: ThemeStyles.regularParagraphOv(
-                            size: 12,
-                            color: ThemeStyles.theme.primary300,
+                        Flexible(
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 16),
+                            child: Text(
+                              secret.username,
+                              style: ThemeStyles.regularParagraphOv(
+                                size: 12,
+                                color: ThemeStyles.theme.primary300,
+                              ),
+                            ),
                           ),
                         ),
                         Text(
