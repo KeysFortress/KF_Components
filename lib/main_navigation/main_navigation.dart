@@ -15,11 +15,8 @@ class MainNavigation extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => MainNavigationViewModel(context),
       builder: (context, viewModel, child) => Container(
-        padding: const EdgeInsets.fromLTRB(6, 40, 0, 6),
-        decoration: BoxDecoration(
-          color: ThemeStyles.theme.primary300,
-          borderRadius: BorderRadius.circular(4),
-        ),
+        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+        color: ThemeStyles.theme.primary300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
