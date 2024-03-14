@@ -26,40 +26,9 @@ class ManualSignBox extends StatelessWidget {
       builder: (context, viewModel, child) => Container(
         color: ThemeStyles.theme.background200,
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(16),
           child: Visibility(
             visible: viewModel.signature == null,
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(40, 0, 40, 20),
-                  width: double.infinity,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: ThemeStyles.theme.accent200,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                CustomTextField(
-                  floatingLabel: "Message",
-                  onChange: viewModel.onMessageChanged,
-                  height: 50,
-                ),
-                const SizedBox(height: 8),
-                CustomTextField(
-                  floatingLabel: "Data",
-                  onChange: viewModel.onDataChanged,
-                  height: 50,
-                ),
-                const SizedBox(height: 8),
-                CustomIconButton(
-                  label: "Sign",
-                  callback: viewModel.onSave,
-                  height: 50,
-                ),
-                const SizedBox(height: 8),
-              ],
-            ),
             replacement: Column(
               children: [
                 Text(
@@ -68,7 +37,7 @@ class ManualSignBox extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Container(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: ThemeStyles.theme.primary300,
@@ -91,7 +60,7 @@ class ManualSignBox extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Container(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(8),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: ThemeStyles.theme.primary300,
@@ -150,7 +119,7 @@ class ManualSignBox extends StatelessWidget {
                   ),
                 if (viewModel.advanced)
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                    margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                     child: CustomTextField(
                       floatingLabel: "Bearer",
                       onChange: viewModel.onBearerChanged,
@@ -180,6 +149,38 @@ class ManualSignBox extends StatelessWidget {
                     ),
                   ],
                 )
+              ],
+            ),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(32, 0, 32, 16),
+                  width: double.infinity,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: ThemeStyles.theme.accent200,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                CustomTextField(
+                  floatingLabel: "Challenge",
+                  hint: "base64 message",
+                  onChange: viewModel.onMessageChanged,
+                  height: 50,
+                ),
+                const SizedBox(height: 8),
+                CustomTextField(
+                  floatingLabel: "Data",
+                  onChange: viewModel.onDataChanged,
+                  height: 50,
+                ),
+                const SizedBox(height: 8),
+                CustomIconButton(
+                  label: "Sign",
+                  callback: viewModel.onSave,
+                  height: 50,
+                ),
+                const SizedBox(height: 8),
               ],
             ),
           ),
