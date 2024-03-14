@@ -31,6 +31,7 @@ class TotpEntryBoxViewModel extends ComponentBaseModel {
 
     await _otpService.add(_code!);
 
+    observer.getObserver("on_sync_event", null);
     // ignore: use_build_context_synchronously
     if (onSaveCallback == null) router.backToPrevious(pageContext);
     onSaveCallback?.call();
