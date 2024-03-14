@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:domain/converters/binary_converter.dart';
+import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/http_request.dart';
 import 'package:domain/models/signature_event.dart';
 import 'package:domain/models/stored_identity.dart';
@@ -21,7 +22,7 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
   String _message = "";
   String get message => _message;
 
-  late String _data;
+  String _data = "";
 
   Signature? _signature = null;
   Signature? get signature => _signature;
@@ -32,6 +33,7 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
   ManualSignBoxViewModel(super.context, this.identity, this.onSaveCallback) {
     _signatureService = getIt.get<ISignatureService>();
     _store = getIt.get<ISignatureStore>();
+    _providerService = getIt.get<IHttpProviderService>();
     _secretManager = getIt.get<ISecretManager>();
   }
 
@@ -47,6 +49,13 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
   }
 
   void onSave() async {
+    if (!validate()) {
+      throw BaseException(
+        context: pageContext,
+        message: "Challange is not a valida base64 message",
+      );
+    }
+
     var getKeyData = await _signatureService.importKeyPair(
       identity.publicKey,
       identity.privateKey,
@@ -110,5 +119,16 @@ class ManualSignBoxViewModel extends ComponentBaseModel {
     }
     _store.add(_event);
     onSaveCallback.call();
+  }
+
+  bool validate() {
+    try {
+      var decode = BianaryConverter.hexStringToList(_message);
+      if (decode.isEmpty) return false;
+
+      return true;
+    } catch (ex) {
+      return false;
+    }
   }
 }
