@@ -1,3 +1,4 @@
+import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/key_dto.dart';
 import 'package:domain/models/stored_identity.dart';
 import 'package:infrastructure/interfaces/iidentity_manager.dart';
@@ -7,6 +8,7 @@ import 'package:shared/component_base_model.dart';
 class IdentityEntryBoxViewModel extends ComponentBaseModel {
   late IIdentityManager _identityManager;
   late IlocalStorage _storage;
+
   final KeyDto keyData;
   late String _name;
   bool _isSaving = false;
@@ -34,11 +36,20 @@ class IdentityEntryBoxViewModel extends ComponentBaseModel {
         keyData.privateKey,
       ),
     );
-    if (result) {
-      observer.getObserver(
-        "reload_passwords",
-        null,
+
+    if (!result) {
+      throw BaseException(
+        // ignore: use_build_context_synchronously
+        context: pageContext,
+        message: "Failed to create identity",
       );
     }
+
+    //Notify observers
+    observer.getObserver("on_sync_event", null);
+    observer.getObserver(
+      "reload_passwords",
+      null,
+    );
   }
 }
