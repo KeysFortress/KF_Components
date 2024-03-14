@@ -7,6 +7,7 @@ import 'package:shared/component_base_model.dart';
 class PasswordEntryBoxViewModel extends ComponentBaseModel {
   late ISecretManager _secretManager;
   late IlocalStorage _storage;
+
   String _password = "";
   String get password => _password;
   late String _name;
@@ -124,6 +125,8 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
       isUnique: _isUnique,
       isSecial: _isSpecialAllowed,
     );
+
+    observer.getObserver("on_sync_event", null);
   }
 
   applyLenght(double value) {
