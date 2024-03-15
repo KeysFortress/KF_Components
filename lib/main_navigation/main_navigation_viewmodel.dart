@@ -5,7 +5,13 @@ import 'package:shared/component_base_model.dart';
 class MainNavigationViewModel extends ComponentBaseModel {
   MainNavigationViewModel(super.context);
 
-  onMenuPressed() {}
+  onMenuPressed() {
+    router.changePage(
+      "/settings",
+      pageContext,
+      TransitionData(next: PageTransition.easeInAndOut),
+    );
+  }
 
   onSharePressed() {
     router.changePage(
