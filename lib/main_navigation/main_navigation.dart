@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 
-import '../cloud_connection_status/cloud_connection_status.dart';
 import '../custom_button/custom_button.dart';
 import 'main_navigation_viewmodel.dart';
 
@@ -16,7 +15,7 @@ class MainNavigation extends StatelessWidget {
       viewModelBuilder: () => MainNavigationViewModel(context),
       builder: (context, viewModel, child) => Container(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-        color: ThemeStyles.theme.primary300,
+        color: ThemeStyles.theme.background300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -25,36 +24,27 @@ class MainNavigation extends StatelessWidget {
               child: CustomButton(
                 callback: viewModel.onMenuPressed,
                 widget: SvgPicture.asset(
-                  "assets/images/menu.svg",
+                  "assets/images/settings.svg",
                   package: "domain",
                   width: 19.16,
                   height: 37.33,
                   fit: BoxFit.contain,
                   colorFilter: ColorFilter.mode(
-                    ThemeStyles.theme.accent100,
+                    ThemeStyles.theme.primary300,
                     BlendMode.srcIn,
                   ),
                 ),
               ),
             ),
-            const CloudConnectionStatus(),
             Container(
               margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-              child: CustomButton(
-                callback: viewModel.onSharePressed,
-                widget: SvgPicture.asset(
-                  "assets/images/sync.svg",
-                  package: "domain",
-                  width: 19.16,
-                  height: 37.33,
-                  fit: BoxFit.contain,
-                  colorFilter: ColorFilter.mode(
-                    ThemeStyles.theme.accent100,
-                    BlendMode.srcIn,
-                  ),
-                ),
+              child: SvgPicture.asset(
+                "assets/logo/KeyFortress Icon.svg",
+                package: 'domain',
+                width: 150,
+                height: 40,
               ),
-            ),
+            )
           ],
         ),
       ),
