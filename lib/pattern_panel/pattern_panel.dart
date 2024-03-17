@@ -1,4 +1,3 @@
-import 'package:components/authentication_failed/authentication_failed.dart';
 import 'package:components/pattern_panel/pattern_panel_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
@@ -12,46 +11,33 @@ class PatternPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => PatternPanelViewModel(context),
-      onViewModelReady: (viewModel) => viewModel.ready(),
-      builder: (context, viewModel, child) => viewModel.patternFailed
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: ThemeStyles.height! / 3,
-                  child: AuthenticationFailed(
-                    onTryAgain: viewModel.onTryAgain,
-                  ),
-                ),
-              ],
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                  decoration: BoxDecoration(
-                    color: ThemeStyles.theme.background200,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: SizedBox(
-                    height: ThemeStyles.height! / 2,
-                    child: PatternLock(
-                      selectedColor: ThemeStyles.theme.primary300,
-                      pointRadius: 8,
-                      showInput: true,
-                      dimension: 3,
-                      relativePadding: 0.7,
-                      selectThreshold: 25,
-                      fillPoints: true,
-                      onInputComplete: (List<int> input) =>
-                          viewModel.onPatternFilled(input),
-                    ),
-                  ),
-                ),
-              ],
+      builder: (context, viewModel, child) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(15),
+            margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+            decoration: BoxDecoration(
+              color: ThemeStyles.theme.background200,
+              borderRadius: BorderRadius.circular(4),
             ),
+            child: SizedBox(
+              height: ThemeStyles.height! / 2,
+              child: PatternLock(
+                selectedColor: ThemeStyles.theme.primary300,
+                pointRadius: 8,
+                showInput: true,
+                dimension: 3,
+                relativePadding: 0.7,
+                selectThreshold: 25,
+                fillPoints: true,
+                onInputComplete: (List<int> input) =>
+                    viewModel.onPatternFilled(input),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -32,7 +32,7 @@ class FillTotpCodeViewModel extends PageViewModel {
     notifyListeners();
     // ignore: use_build_context_synchronously
     router.changePage(
-      "/passwords",
+      "/dashboard",
       pageContext,
       TransitionData(next: PageTransition.easeInAndOut),
     );
