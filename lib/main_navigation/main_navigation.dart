@@ -20,7 +20,12 @@ class MainNavigation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+              decoration: BoxDecoration(
+                color: ThemeStyles.theme.background200,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              padding: const EdgeInsets.only(left: 8),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: CustomButton(
                 callback: viewModel.onMenuPressed,
                 widget: SvgPicture.asset(
@@ -37,12 +42,32 @@ class MainNavigation extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-              child: SvgPicture.asset(
-                "assets/logo/KeyFortress Icon.svg",
-                package: 'domain',
-                width: 150,
-                height: 40,
+              decoration: BoxDecoration(
+                color: ThemeStyles.theme.background200,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              padding: const EdgeInsets.only(right: 8),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "KeysFortress",
+                    style: ThemeStyles.whiteParagraph,
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  SvgPicture.asset(
+                    "assets/logo/KeyFortress Icon.svg",
+                    package: 'domain',
+                    width: 150,
+                    height: 37.33,
+                    fit: BoxFit.contain,
+                  ),
+                ],
               ),
             )
           ],
