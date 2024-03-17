@@ -8,8 +8,6 @@ import 'package:local_auth/error_codes.dart' as auth_error;
 
 class BiometricPanelViewModel extends ComponentBaseModel {
   final LocalAuthentication auth = LocalAuthentication();
-  bool _failedToAuthenticate = false;
-  bool get failedToAuthenticate => _failedToAuthenticate;
   BiometricPanelViewModel(super.context);
 
   ready() async {
@@ -31,7 +29,7 @@ class BiometricPanelViewModel extends ComponentBaseModel {
       if (result) {
         router.isLocked = false;
         router.changePage(
-          "/passwords",
+          "/dashboard",
           // ignore: use_build_context_synchronously
           pageContext,
           TransitionData(next: PageTransition.slideForward),
@@ -39,7 +37,7 @@ class BiometricPanelViewModel extends ComponentBaseModel {
       }
     } on PlatformException catch (e) {
       if (e.code == auth_error.notEnrolled) {
-        _failedToAuthenticate = true;
+        observer.getObserver("unlock_failed", null);
         throw BaseException(
           // ignore: use_build_context_synchronously
           context: pageContext,
@@ -47,14 +45,14 @@ class BiometricPanelViewModel extends ComponentBaseModel {
         );
       } else if (e.code == auth_error.lockedOut ||
           e.code == auth_error.permanentlyLockedOut) {
-        _failedToAuthenticate = true;
+        observer.getObserver("unlock_failed", null);
         throw BaseException(
           // ignore: use_build_context_synchronously
           context: pageContext,
           message: e.message,
         );
       } else {
-        _failedToAuthenticate = true;
+        observer.getObserver("unlock_failed", null);
         throw BaseException(
           // ignore: use_build_context_synchronously
           context: pageContext,
@@ -63,11 +61,5 @@ class BiometricPanelViewModel extends ComponentBaseModel {
       }
     }
     notifyListeners();
-  }
-
-  onTryAgain() async {
-    _failedToAuthenticate = false;
-    notifyListeners();
-    await requestBiometric();
   }
 }

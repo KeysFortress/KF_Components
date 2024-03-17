@@ -8,38 +8,24 @@ class PatternPanelViewModel extends ComponentBaseModel {
   late IAuthorizationService _authorizationService;
   late IPageRouterService _routerService;
 
-  bool _patternFailed = false;
-  bool get patternFailed => _patternFailed;
-
   PatternPanelViewModel(super.context) {
     _authorizationService = getIt.get<IAuthorizationService>();
     _routerService = getIt.get<IPageRouterService>();
   }
 
-  ready() {
-    notifyListeners();
-  }
-
   onPatternFilled(List<int> input) async {
     var patternMatch = await _authorizationService.unlockPattern(input);
     if (!patternMatch) {
-      _patternFailed = true;
-      notifyListeners();
+      observer.getObserver("unlock_failed", null);
       return;
     }
     _routerService.isLocked = false;
 
     notifyListeners();
-    // ignore: use_build_context_synchronously
     router.changePage(
-      "/passwords",
+      "/dashboard",
       pageContext,
       TransitionData(next: PageTransition.easeInAndOut),
     );
-  }
-
-  onTryAgain() {
-    _patternFailed = false;
-    notifyListeners();
   }
 }
