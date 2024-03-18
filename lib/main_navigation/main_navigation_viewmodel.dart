@@ -13,7 +13,7 @@ class MainNavigationViewModel extends ComponentBaseModel {
     );
   }
 
-  onSharePressed() {
+  onConnectPressed() {
     router.changePage(
       "/connect-devices",
       pageContext,
