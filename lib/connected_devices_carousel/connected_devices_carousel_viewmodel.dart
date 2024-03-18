@@ -1,4 +1,5 @@
 import 'package:components/connected_device_card/connected_device_card.dart';
+import 'package:components/connected_device_card/connection_card.dart';
 import 'package:domain/models/device.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
@@ -28,23 +29,6 @@ class ConnectedDevicesCarouselViewModel extends ComponentBaseModel {
       var connected = await _devicesService.isDeviceConnected(device);
       if (connected) connectedDevices.add(device);
     }
-    connectedDevices.add(
-      Device("name", "", "", "22", "adwa", DeviceTypes.desktop, SyncTypes.full),
-    );
-    connectedDevices.add(
-      Device("name", "", "", "22", "adwa", DeviceTypes.desktop, SyncTypes.full),
-    );
-    connectedDevices.add(
-      Device("name", "", "", "22", "adwa", DeviceTypes.desktop, SyncTypes.full),
-    );
-    connectedDevices.add(
-      Device("name", "", "", "22", "adwa", DeviceTypes.desktop, SyncTypes.full),
-    );
-    _cards.addAll(
-      connectedDevices
-          .map((e) => ConnectedDeviceCard(currentDevice: e))
-          .toList(),
-    );
 
     notifyListeners();
   }
