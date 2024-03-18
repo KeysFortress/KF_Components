@@ -10,6 +10,7 @@ class SimpleToggle extends StatelessWidget {
   final String title;
   final bool isActive;
   final Function onPressed;
+  final Color? color;
 
   const SimpleToggle({
     super.key,
@@ -19,6 +20,7 @@ class SimpleToggle extends StatelessWidget {
     required this.isActive,
     required this.onPressed,
     this.width,
+    this.color,
   });
 
   @override
@@ -30,9 +32,10 @@ class SimpleToggle extends StatelessWidget {
         height: height,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: isActive
-              ? ThemeStyles.theme.primary100
-              : ThemeStyles.theme.primary300,
+          color: color ??
+              (isActive
+                  ? ThemeStyles.theme.primary100
+                  : ThemeStyles.theme.primary300),
           borderRadius: BorderRadius.circular(4),
         ),
         child: Column(
