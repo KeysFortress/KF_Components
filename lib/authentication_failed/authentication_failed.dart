@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 
 class AuthenticationFailed extends StatelessWidget {
   final Function onTryAgain;
-  const AuthenticationFailed({super.key, required this.onTryAgain});
+  final int? remainingAttempts;
+  const AuthenticationFailed(
+      {super.key, required this.onTryAgain, this.remainingAttempts});
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +36,17 @@ class AuthenticationFailed extends StatelessWidget {
               BlendMode.srcIn,
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            "Remaining attempts before data descrution",
-            style: ThemeStyles.regularParagraph,
-          ),
+          if (remainingAttempts != null)
+            Column(
+              children: [
+                const SizedBox(height: 8),
+                Text(
+                  "${remainingAttempts ?? ""} Remaining attempts before data descrution",
+                  style: ThemeStyles.regularParagraph,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           const SizedBox(
             height: 16,
           ),
