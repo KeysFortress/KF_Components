@@ -20,6 +20,7 @@ class IdentityEntryBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => IdentityEntryBoxViewModel(context, keyData),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Container(
         color: ThemeStyles.theme.background200,
         child: Container(
