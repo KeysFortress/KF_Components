@@ -88,7 +88,7 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
     }
 
     _isCopyActionPresent = true;
-    if (_isSyncOnActionEnabled) syncChanges();
+    if (_isSyncOnActionEnabled) observer.getObserver("sync_changes", null);
 
     notifyListeners();
   }
@@ -160,17 +160,5 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
       "reload_passwords",
       null,
     );
-  }
-
-  void syncChanges() {
-    Future.delayed(const Duration(microseconds: 200), () async {
-      var devices = await _devicesService.all();
-      for (var device in devices) {
-        var connected = await _devicesService.isDeviceConnected(device);
-        if (connected) {
-          _syncService.synchronize(device);
-        }
-      }
-    });
   }
 }
