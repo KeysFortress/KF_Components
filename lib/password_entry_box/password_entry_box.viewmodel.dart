@@ -144,8 +144,6 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
       isUnique: _isUnique,
       isSecial: _isSpecialAllowed,
     );
-
-    observer.getObserver("on_sync_event", null);
   }
 
   applyLenght(double value) {

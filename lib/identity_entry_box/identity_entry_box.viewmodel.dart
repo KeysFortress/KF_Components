@@ -58,7 +58,6 @@ class IdentityEntryBoxViewModel extends ComponentBaseModel {
     if (_isOnIdentitySyncEnabled) observer.getObserver("sync_changes", null);
 
     //Notify observers
-    observer.getObserver("on_sync_event", null);
     observer.getObserver(
       "reload_passwords",
       null,

@@ -15,9 +15,10 @@ class TotpEntryBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => TotpEntryBoxViewModel(context, onSave),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Container(
         color: ThemeStyles.theme.background200,
-        child: Container(
+        child: SizedBox(
           width: 600,
           child: Column(
             children: [
