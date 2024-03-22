@@ -1,12 +1,17 @@
+import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_secret.dart';
+import 'package:infrastructure/interfaces/idevices_service.dart';
 import 'package:infrastructure/interfaces/ilocal_storage.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
+import 'package:infrastructure/interfaces/isync_service.dart';
 import 'package:shared/component_base_model.dart';
 
 class PasswordEntryBoxViewModel extends ComponentBaseModel {
   late ISecretManager _secretManager;
   late IlocalStorage _storage;
+  late ISyncService _syncService;
+  late IDevicesService _devicesService;
 
   String _password = "";
   String get password => _password;
@@ -33,14 +38,21 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
   bool get isCopyActionPresent => _isCopyActionPresent;
   bool _isSaving = false;
 
+  bool _isSyncOnActionEnabled = false;
+
   PasswordEntryBoxViewModel(super.context) {
     _secretManager = getIt.get<ISecretManager>();
     _storage = getIt.get<IlocalStorage>();
+    _syncService = getIt.get<ISyncService>();
+    _devicesService = getIt.get<IDevicesService>();
   }
 
-  ready(String current) {
+  ready(String current) async {
     _password = current;
     _passwordSize = password.length.toDouble();
+    var syncSettings = await _syncService.getGlobalSettings();
+    _isSyncOnActionEnabled =
+        syncSettings['onAction'] && syncSettings['onPassword'];
     notifyListeners();
   }
 
@@ -68,10 +80,17 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
       ),
     );
 
-    if (result) {
-      _isCopyActionPresent = true;
-      notifyListeners();
+    if (!result) {
+      throw BaseException(
+        context: pageContext,
+        message: "Failed to save the password",
+      );
     }
+
+    _isCopyActionPresent = true;
+    if (_isSyncOnActionEnabled) syncChanges();
+
+    notifyListeners();
   }
 
   onAdvancedPressed() {
@@ -141,5 +160,17 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
       "reload_passwords",
       null,
     );
+  }
+
+  void syncChanges() {
+    Future.delayed(const Duration(microseconds: 200), () async {
+      var devices = await _devicesService.all();
+      for (var device in devices) {
+        var connected = await _devicesService.isDeviceConnected(device);
+        if (connected) {
+          _syncService.synchronize(device);
+        }
+      }
+    });
   }
 }
