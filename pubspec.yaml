@@ -22,7 +22,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   pattern_lock: ^2.0.0
   local_auth: ^2.1.8
-
+  basic_utils: ^5.7.0
 
 dev_dependencies:
   flutter_test:
