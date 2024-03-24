@@ -79,9 +79,11 @@ class TotpEntryBox extends StatelessWidget {
                       ],
                     ),
                     if (viewModel.code != null)
-                      const Positioned(
+                      Positioned(
                         left: 10,
-                        child: SecoondsCounter(),
+                        child: SecoondsCounter(
+                          otpCode: viewModel.code!,
+                        ),
                       ),
                   ],
                 ),

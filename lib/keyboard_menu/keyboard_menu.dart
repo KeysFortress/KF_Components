@@ -54,7 +54,7 @@ class KeyboardMenu extends StatelessWidget {
                           height: 120,
                           width: double.infinity,
                           icon: "assets/images/timer.svg",
-                          title: "TOTP/OTP",
+                          title: "TOTP",
                           isActive: false,
                           onPressed: viewModel.onTotpPressed,
                         ),
