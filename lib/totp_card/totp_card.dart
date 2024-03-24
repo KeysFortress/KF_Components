@@ -66,9 +66,11 @@ class TotpCard extends StatelessWidget {
                 )
               ],
             ),
-            const Positioned(
+            Positioned(
               left: 10,
-              child: SecoondsCounter(),
+              child: SecoondsCounter(
+                otpCode: otpCode,
+              ),
             ),
             if (canDelete)
               Positioned(

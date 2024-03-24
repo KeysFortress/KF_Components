@@ -22,7 +22,7 @@ class TotpCardViewModel extends ComponentBaseModel {
   }
 
   ready() {
-    _code = _otpService.getCode(_otpCode.secret);
+    _code = _otpService.getCode(_otpCode.secret, _otpCode.interval ?? 30);
     _address = _otpCode.address;
     _issuer = _otpCode.issuer;
     notifyListeners();

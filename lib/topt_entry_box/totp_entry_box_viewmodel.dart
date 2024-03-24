@@ -34,7 +34,7 @@ class TotpEntryBoxViewModel extends ComponentBaseModel {
   String getCode() {
     if (_code == null) return "--";
 
-    return _otpService.getCode(_code!.code);
+    return _otpService.getCode(_code!.code, _code!.interval ?? 30);
   }
 
   void onSave() async {
