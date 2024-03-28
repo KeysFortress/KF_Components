@@ -15,8 +15,8 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
 
   String _password = "";
   String get password => _password;
-  late String _name;
-  late String _email;
+  String _name = "";
+  String _email = "";
 
   bool _isAdvanced = false;
   bool get isAdvanced => _isAdvanced;
@@ -48,6 +48,7 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
   }
 
   ready(String current) async {
+    _isSaving = false;
     _password = current;
     _passwordSize = password.length.toDouble();
     var syncSettings = await _syncService.getGlobalSettings();
@@ -65,6 +66,7 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
   }
 
   Future onSave() async {
+    validate();
     if (_isSaving) return;
 
     _isSaving = true;
@@ -158,5 +160,16 @@ class PasswordEntryBoxViewModel extends ComponentBaseModel {
       "reload_passwords",
       null,
     );
+  }
+
+  validate() {
+    if (_name.isEmpty) {
+      throw BaseException(
+          context: pageContext, message: "The name field is required");
+    }
+    if (_email.isEmpty) {
+      throw BaseException(
+          context: pageContext, message: "The email field is required");
+    }
   }
 }
